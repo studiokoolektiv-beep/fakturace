@@ -9,7 +9,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Fakturace">
 <meta name="robots" content="noindex, nofollow">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ff4000'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='38' font-weight='700' text-anchor='middle' fill='%23000'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <style>
   html, body { margin: 0; height: 100%; background: #e6e6e6; }
   iframe { display: block; border: 0; width: 100%; height: 100vh; height: 100dvh; }
@@ -55,7 +57,9 @@
   f.credentialless = true;
   f.title = 'Fakturace KOOLEKTIV';
   f.allow = 'clipboard-write';
-  f.src = APP + location.hash;
+  // Jedinečný parametr: prohlížeč si jinak pamatuje přesměrování přímé adresy na /u/N/ (z dřívějších
+  // návštěv s Google přihlášením) a použil by ho i tady. Apps Script parametr ignoruje.
+  f.src = APP + '?o=' + Date.now().toString(36) + location.hash;
   document.body.appendChild(f);
 })();
 </script>
