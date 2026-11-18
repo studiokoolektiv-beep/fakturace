@@ -12,6 +12,8 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>
   html, body { margin: 0; height: 100%; background: #e6e6e6; }
   iframe { display: block; border: 0; width: 100%; height: 100vh; height: 100dvh; }
@@ -61,6 +63,11 @@
   // návštěv s Google přihlášením) a použil by ho i tady. Apps Script parametr ignoruje.
   f.src = APP + '?o=' + Date.now().toString(36) + location.hash;
   document.body.appendChild(f);
+
+  // Instalace jako aplikace (PWA). Service worker bere stránku vždy čerstvou ze sítě.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () { /* nic */ }); });
+  }
 })();
 </script>
 </body>
